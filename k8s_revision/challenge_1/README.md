@@ -11,11 +11,11 @@
 - $ kubectl get replicaset -o wide
 - $ kubectl get services -o wide
 - $ kubectl get nodes
-- $ curl http://<SELECT_ONE_NODE_IP_ADDRESS>:32000 (We're calling to the Nginx through the NodePort above).
+- $ curl http://<SELECT_ONE_NODE_IP_ADDRESS>:32000 (We're calling to the Nginx through the NodeIP and NodePort above).
 - $ minikube ssh -p star -n <ANY_NODE_NAME>
 - $ -> curl localhost:32000 (We're calling to the Nginx through the NodePort above).
 - $ -> curl http://127.0.0.1:32000 (We're calling to the Nginx through the NodePort above).
-- $ -> curl http://<SELECT_ONE_POD_IP_ADDRESS>:80 (We're calling to the Nginx through the Pod port inside the current cluster and the same default namespace).
+- $ -> curl http://<SELECT_ONE_POD_IP_ADDRESS>:80 (We're calling to the Nginx through the Pod port inside the current cluster with the same default namespace).
 - $ -> exit
 - $ kubectl delete -f ./templates/nginx-deployment.yaml
 - $ kubectl delete -f ./templates/nginx-service.yaml
