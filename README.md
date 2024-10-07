@@ -1,2 +1,2 @@
-# techmaster-devops-test-repo
-Please access folders and read README file from there.
+# techmaster-devops-k8s
+Please access parent folders and read README files from there.
