@@ -19,3 +19,6 @@
 - $ -> exit
 - $ kubectl delete -f ./templates/nginx-deployment.yaml
 - $ kubectl delete -f ./templates/nginx-service.yaml
+3. Result images:
+  - ![Ảnh 1](./images/1.png)
+  - ![Ảnh 2](./images/2.png)
