@@ -6,7 +6,7 @@
 - $ nano nginx.conf (We'll update the current Nginx config by this new config file. Note that we'll use this "quoctran.com" server name with the root path "/var/www/quoctran.com/public")
 - $ minikube start --cpus=2 --nodes=2 --memory=2048 -p star
 - $ minikube profile list
-- $ kubectl create configmap nginx-config-file --from-file nginx.conf
+- $ kubectl create configmap nginx-config-file --from-file ./templates/nginx.conf
 - $ kubectl apply -f ./templates/nginx-deployment.yaml
 - $ kubectl apply -f ./templates/nginx-service.yaml
 - $ kubectl get pods -o wide -l app=nginx
