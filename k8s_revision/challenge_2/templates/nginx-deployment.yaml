@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      initContainers:
+        - name: init-nginx-project
+          image: ubuntu:latest
+          command: ["/bin/sh", "-c"]
+          args:
+          - apt-get update && apt-get install -y unzip curl && curl -o source-code.zip https://www.free-css.com/assets/files/free-css-templates/download/page296/little-fashion.zip && unzip source-code.zip -d /var/www/quoctran.com/public && mv /var/www/quoctran.com/public/2127_little_fashion/* /var/www/quoctran.com/public
+          volumeMounts:
+            - name: nginx-source-volume
+              mountPath: /var/www/quoctran.com/public
+      containers:
+        - name: nginx-container
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-source-volume
+              mountPath: /var/www/quoctran.com/public
+            - name: nginx-config-volume
+              mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: nginx-source-volume
+          emptyDir: {}
+        - name: nginx-config-volume
+          configMap:
+            name: nginx-config-file
+
