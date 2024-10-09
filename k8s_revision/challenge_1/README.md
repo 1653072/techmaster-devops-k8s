@@ -10,7 +10,7 @@
 - $ kubectl get deployments -o wide
 - $ kubectl get replicaset -o wide
 - $ kubectl get services -o wide
-- $ kubectl get nodes
+- $ kubectl get nodes -o wide
 - $ curl http://<SELECT_ONE_NODE_IP_ADDRESS>:32000 (We're calling to the Nginx through the NodeIP and NodePort above).
 - $ minikube ssh -p star -n <ANY_NODE_NAME>
 - $ -> curl localhost:32000 (We're calling to the Nginx through the NodePort above).
