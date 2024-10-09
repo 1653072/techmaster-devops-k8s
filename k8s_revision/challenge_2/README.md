@@ -25,6 +25,13 @@
 - $ kubectl delete -f ./templates/nginx-deployment.yaml
 - $ kubectl delete -f ./templates/nginx-service.yaml
 - $ kubectl delete configmap nginx-config-file
+- minikube stop -p star
 4. Result images:
   - ![Ảnh 1](./images/1.png)
   - ![Ảnh 2](./images/2.png)
+  - ![Ảnh 3](./images/3.png)
+  - ![Ảnh 4](./images/4.png)
+  - ![Ảnh 5](./images/5.png)
+  - ![Ảnh 6](./images/6.png)
+  - ![Ảnh 7](./images/7.png)
+  - ![Ảnh 8](./images/8.png)
