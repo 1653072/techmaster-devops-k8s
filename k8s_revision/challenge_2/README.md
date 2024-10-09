@@ -34,4 +34,3 @@
   - ![Ảnh 5](./images/5.png)
   - ![Ảnh 6](./images/6.png)
   - ![Ảnh 7](./images/7.png)
-  - ![Ảnh 8](./images/8.png)
