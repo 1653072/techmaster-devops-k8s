@@ -21,7 +21,7 @@
 - $ -> curl http://<SELECT_ONE_POD_IP_ADDRESS>:80 (We're calling to the Nginx through the Pod port inside the current cluster with the same default namespace).
 - $ -> exit
 - $ kubectl port-forward <POD_NAME> 31000:80 --address 0.0.0.0 (We'll public the port 31000 which is binded with the 0.0.0.0 address)
-- We can access our new website through the AWS EC2 public IPv4 DNS: http://ec2-47-129-65-68.ap-southeast-1.compute.amazonaws.com:31000/ 
+- We can access our new website through the AWS EC2 public IPv4 DNS: http://ec2-47-129-65-68.ap-southeast-1.compute.amazonaws.com:31000/ (Please don't use "https" because we haven't supported the SSL/TLS certificate yet)
 - $ kubectl delete -f ./templates/nginx-deployment.yaml
 - $ kubectl delete -f ./templates/nginx-service.yaml
 - $ kubectl delete configmap nginx-config-file
