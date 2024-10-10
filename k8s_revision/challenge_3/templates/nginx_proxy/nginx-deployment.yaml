@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-proxy-deployment
+  labels:
+    app: nginx-proxy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-proxy
+  template:
+    metadata:
+      labels:
+        app: nginx-proxy
+    spec:
+      containers:
+        - name: nginx-proxy
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              ln -sf /etc/nginx/sites-available/nginx-site-config /etc/nginx/sites-enabled/nginx-site-config && cp /etc/nginx/temp/nginx.conf/* /etc/nginx && rm /etc/nginx/conf.d/* && nginx -g 'daemon off;'
+          volumeMounts:
+            - name: nginx-config-volume-3
+              mountPath: /etc/nginx/temp/nginx.conf
+            - name: nginx-site-available-volume
+              mountPath: /etc/nginx/sites-available
+            - name: nginx-site-enabled-volume
+              mountPath: /etc/nginx/sites-enabled
+      volumes:
+        - name: nginx-config-volume-3
+          configMap:
+            name: nginx-config-file-3
+        - name: nginx-site-enabled-volume
+          emptyDir: {}
+        - name: nginx-site-available-volume
+          configMap:
+            name: nginx-site-config-file
+

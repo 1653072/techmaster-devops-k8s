@@ -1,0 +1,42 @@
+server {
+	listen   80;
+	listen   [::]:80;
+
+	server_name quoctran.com www.quoctran.com;
+
+	location / {
+	   root   /usr/share/nginx/html;
+	   index  index.html index.htm;
+	}
+
+	location /web1 {
+		proxy_pass http://web-1-service.default.svc.cluster.local/;
+		proxy_set_header Host $http_host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_set_header Referer "$scheme://$http_host/web1";
+	}
+
+	location /web2 {
+		proxy_pass http://web-2-service.default.svc.cluster.local/;
+		proxy_set_header Host $http_host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_set_header Referer "$scheme://$http_host/web2";
+	}
+
+	# Location block for static files
+	location ~* \.(css|images|fonts|js|jpg|jpeg|gif|png|ico|svg|woff|woff2|ttf|eot|otf)$ {
+		if ($proxy_destination = "") {
+			return 404; # Return 404 if referer does not match web1 or web2
+		}
+		proxy_pass $proxy_destination;
+		proxy_set_header Host $http_host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_set_header Referer $http_referer;
+	}
+}

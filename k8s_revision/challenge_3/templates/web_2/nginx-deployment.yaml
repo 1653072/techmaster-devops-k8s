@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-2-deployment
+  labels:
+    app: web-2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-2
+  template:
+    metadata:
+      labels:
+        app: web-2
+    spec:
+      initContainers:
+        - name: init-web-2
+          image: ubuntu:latest
+          command: ["/bin/sh", "-c"]
+          args:
+          - apt-get update && apt-get install -y unzip curl && curl -o source-code.zip https://www.free-css.com/assets/files/free-css-templates/download/page296/neogym.zip && unzip source-code.zip -d /var/www/quoctran.com/public/web_2 && mv /var/www/quoctran.com/public/web_2/neogym-html/* /var/www/quoctran.com/public/web_2
+          volumeMounts:
+            - name: nginx-source-volume-2
+              mountPath: /var/www/quoctran.com/public/web_2
+      containers:
+        - name: web-2
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-source-volume-2
+              mountPath: /var/www/quoctran.com/public/web_2
+            - name: nginx-config-volume-2
+              mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: nginx-source-volume-2
+          emptyDir: {}
+        - name: nginx-config-volume-2
+          configMap:
+            name: nginx-config-file-2
+
