@@ -15,22 +15,18 @@
 - $ kubectl apply -f ./templates/obo_config.yaml && kubectl apply -f ./templates/mysql_config.yaml && kubectl apply -f ./templates/db_deployment.yaml 
 - $ kubectl apply -f ./templates/app_deployment.yaml (We should run this app_deployment after MySQL in db_deployment is running)
 - $ kubectl apply -f ./templates/ingress.yaml (You have to wait more than 40 seconds for the ingress to start running. The given host is "www.quoctran.com"). 
-- $ kubectl get nodes,services,deployments,secrets,configmaps -o wide
-- $ kubectl get pods,ingress -o wide
+- $ kubectl get nodes,services,deployments,secrets,configmaps,pods,ingress -o wide
 ---
 - $ curl --resolve "www.quoctran.com:80:$(minikube ip -p star)" -i http://www.quoctran.com (This command will print the obo website html content through the provided ingress).
 - (Optional) To run the "curl http://www.quoctran.com" command instead of the command above, you need to run the "minikube ip -p star" command to get minikube IP address first, then add this string "<minikube_ip> www.quoctran.com" to this system file "/etc/hosts".
 ---
 - $ kubectl port-forward svc/obo-service 31000:8080 --address 0.0.0.0 (We'll public the port 31000 for obo-service which is binded with the 0.0.0.0 address)
 - We can access our new website through the AWS EC2 public IPv4 DNS (Please don't use "https" because we haven't supported the SSL/TLS certificate yet):
- - http://ec2-18-138-224-3.ap-southeast-1.compute.amazonaws.com:31000/
- - http://ec2-18-138-224-3.ap-southeast-1.compute.amazonaws.com:31000/admin
- - You can try these accounts to login:
-  - Admin (Username: admin@obostadium.com | Password: 123456)
-  - Memory (Username: monguyen@gmail.com | Password: 123456)
----
-- $ kubectl delete configmap mysql-init-file
-- $ kubectl delete -f ./templates
+  - http://ec2-18-138-224-3.ap-southeast-1.compute.amazonaws.com:31000/
+  - http://ec2-18-138-224-3.ap-southeast-1.compute.amazonaws.com:31000/admin
+  - You can try these accounts to login:
+    - Admin (Username: admin@obostadium.com | Password: 123456)
+    - Memory (Username: monguyen@gmail.com | Password: 123456)
 ---
 To access your MySQL pod to execute any DDL or DML queries:
 - $ kubectl exec -it <mysql_pod_name> -- sh
@@ -40,3 +36,6 @@ To access your MySQL pod to execute any DDL or DML queries:
 - $ use obo; (Use "obo" database name).
 - $ show tables; (Show all tables in the given database).
 - $ select * from users; (To view a list of users in the "users" table).
+---
+- $ kubectl delete configmap mysql-init-file
+- $ kubectl delete -f ./templates
