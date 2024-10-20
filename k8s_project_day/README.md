@@ -3,7 +3,7 @@
 - Obo Github: https://github.com/orez-fu/obo/tree/main
 
 2. Commands:
-- $ cd ~ && git clone <techmaster-devops-k8s> && cd ~/techmaster-devops-k8s/k8s_project_day
+- $ cd ~ && git clone git@github.com:1653072/techmaster-devops-k8s.git && cd ~/techmaster-devops-k8s/k8s_project_day
 - $ chmod 755 make_docker_image_obo_project.sh
 - $ export DOCKER_USERNAME=<our_docker_username> && ./make_docker_image_obo_project (We'll be required to input our docker username and password, then we'll work on the "<our_docker_username>/obo:v1" image).
 - $ rm -rf obo
