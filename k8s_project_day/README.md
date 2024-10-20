@@ -42,3 +42,21 @@ To access our MySQL pod to execute any DDL or DML queries:
 ---
 - $ kubectl delete configmap mysql-init-file
 - $ kubectl delete -f ./templates
+
+3. Result images:
+  - ![Ảnh 1](./images/1.png)
+  - ![Ảnh 2](./images/2.png)
+  - ![Ảnh 3](./images/3.png)
+  - ![Ảnh 4](./images/4.png)
+  - ![Ảnh 5](./images/5.png)
+  - ![Ảnh 6](./images/6.png)
+  - ![Ảnh 7](./images/7.png)
+  - ![Ảnh 8](./images/8.png)
+  - ![Ảnh 9](./images/9.png)
+  - ![Ảnh 10](./images/10.png)
+  - ![Ảnh 11](./images/11.png)
+  - ![Ảnh 12](./images/12.png)
+  - ![Ảnh 13](./images/13.png)
+  - ![Ảnh 14](./images/14.png)
+  - ![Ảnh 15](./images/15.png)
+  - ![Ảnh 16](./images/16.png)
