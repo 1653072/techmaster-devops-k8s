@@ -8,7 +8,7 @@
 - $ export DOCKER_USERNAME=<your_docker_username> && ./make_docker_image_obo_project (You'll be required to input your docker username and password, then you'll work on the "<your_docker_username>/obo:v1" image).
 - $ rm -rf obo
 - $ minikube start --cpus=2 --nodes=2 --memory=2048 -p star
-- $ minikube addons enable ingress -p star (This command will enable "ingress" for the "star" profile in minikube)
+- $ minikube addons enable ingress -p star (This command will enable "ingress" for the "star" profile in minikube - [K8S Ingress Minkube Wiki](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/))
 - $ minikube profile list
 ---
 - $ kubectl create configmap mysql-init-file --from-file ./init_mysql_data/obo.sql
