@@ -15,11 +15,11 @@
 - $ kubectl apply -f ./templates/app_deployment.yaml (We should run this app_deployment after MySQL in db_deployment is running more than 20 seconds)
 - $ kubectl get nodes,services,deployments,secrets,persistentvolumes,persistentvolumeclaims,pods -o wide
 ---
-- $ curl http://<MinikubeIP>:<NodePort>/api/books (Please replace NodePort by 30000 which was configured in ./templates/app_deployment.yaml)
-- $ curl -XPOST -H 'Content-Type: application/json' http://<MinikubeIP>:<NodePort>/api/books -d '{"title": "First Book", "author": "Author Name"}'
-- $ curl -XPUT -H 'Content-Type: application/json' http://<MinikubeIP>:<NodePort>/api/books/1 -d '{"title": "Another Title"}'
-- $ curl http://<MinikubeIP>:<NodePort>/api/books/1
-- $ curl -XDELETE http://<MinikubeIP>:<NodePort>/api/books/1
+- $ curl http://MinikubeIP:NodePort/api/books (Please replace NodePort by 30000 which was configured in ./templates/app_deployment.yaml)
+- $ curl -XPOST -H 'Content-Type: application/json' http://MinikubeIP:NodePort/api/books -d '{"title": "First Book", "author": "Author Name"}'
+- $ curl -XPUT -H 'Content-Type: application/json' http://MinikubeIP:NodePort/api/books/1 -d '{"title": "Another Title"}'
+- $ curl http://MinikubeIP:NodePort/api/books/1
+- $ curl -XDELETE http://MinikubeIP:NodePort/api/books/1
 ---
 - $ kubectl delete secret liquibase-config-file 
 - $ kubectl delete -f ./templates/bookstore_api_config.yaml && kubectl delete -f ./templates/mysql_config.yaml && kubectl delete -f ./templates/db_deployment.yaml && kubectl delete -f ./templates/app_deployment.yaml && kubectl delete -f ./templates/db_volume.yaml
