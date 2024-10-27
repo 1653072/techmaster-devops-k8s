@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookstore-api
+  labels:
+    app: bookstore-api
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: bookstore-api
+  template:
+    metadata:
+      labels:
+        app: bookstore-api
+    spec:
+      initContainers:
+        - name: bookstore-api-migration-container
+          image: "quoctran08/mysql-connector-java:v1"
+          command: ["liquibase", "--driver=com.mysql.cj.jdbc.Driver", "--defaults-file=/liquibase/src/main/resources/liquibase.properties", "update"]
+          env:
+            - name: INSTALL_MYSQL
+              value: 'true'
+          volumeMounts:
+            - name: liquibase-config-volume
+              mountPath: /liquibase/src/main/resources
+      containers:
+        - name: bookstore-api-app-container
+          image: "quoctran08/bookstore-api:v1"
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "100m"
+          env:
+          - name: SPRING_DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: bookstore-api-config-file
+                key: SPRING_DATABASE_URL
+          - name: SPRING_DATABASE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: bookstore-api-config-file
+                key: SPRING_DATABASE_USERNAME
+          - name: SPRING_DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: bookstore-api-config-file
+                key: SPRING_DATABASE_PASSWORD
+      volumes:
+        - name: liquibase-config-volume
+          secret:
+            secretName: liquibase-config-file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bookstore-api
+  name: bookstore-api-service
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30000
+    protocol: TCP
+  selector:
+    app: bookstore-api
+  type: NodePort

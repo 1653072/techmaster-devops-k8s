@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secret
+metadata:
+   name: bookstore-api-config-file
+type: Opaque
+stringData:
+  SPRING_DATABASE_URL: "jdbc:mysql://db:3306/books_db?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
+  SPRING_DATABASE_USERNAME: "user"
+  SPRING_DATABASE_PASSWORD: "pass"

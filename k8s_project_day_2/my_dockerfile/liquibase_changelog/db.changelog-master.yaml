@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - include:
+      file: init_schema.yaml
+      relativeToChangelogFile: true
+
+  - changeSet:
+      id: 2
+      author: ruanbekker
+      changes:
+        - createTable:
+            tableName: example_table
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
